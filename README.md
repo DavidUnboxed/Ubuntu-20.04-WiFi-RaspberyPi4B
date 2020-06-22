@@ -1,47 +1,26 @@
 # Ubuntu 20.04 WiFi RaspberyPi 4B
-Configuring Ubuntu 20.04 to use WiFi on Raspberry Pi 4B using cloud-init (for use with a monitor or headless).
+How to configure Raspberry Pi 4B & Ubuntu 20.04 to use WiFi.
+  This method uses cloud-init and is suitable for Raspberry Pi with a monitor or headless configuration.
+  Tested using Raspberry Pi 4B /w 4GB of RAM & Ubuntu 20.04 LTS 64-bit.
+  This solution has not been tested on any other board or OS versions.
+
 NOTE: I first published this solution here: https://raspberrypi.stackexchange.com/a/113642/121286. 
-Using Andbdrew's tips there, I was able to make this work headless (and with a head) consistently without disabling Cloud-Init. Thanks to @enconn, for brainstorming with me on this, and for directing me to documentation for cloudinit: https://cloudinit.readthedocs.io/en/latest/topics/examples.html#reboot-poweroff-when-finished.
+Using Andbdrew's tips there for inspiration, I was able to make this work headless (and with a head) consistently without disabling Cloud-Init. My solution required a reboot because network-config changes are pulled in by cloud-init as it makes the netplan during first boot - before the regional wifi governning frequencies is instantiated. Therefore it required a reboot in order to get wlan0 up. Thanks to my friend, https://github.com/AWildBeard, for brainstorming with me on this problem - and for directing me to documentation for cloudinit: https://cloudinit.readthedocs.io/en/latest/topics/examples.html#reboot-poweroff-when-finished.
 
-1. Image the SSD using Raspberry Pi Imager v 1.3 selecting the 'UNBUNTU 20.04 LTS (RASBERRY PI 3/4)(64-bit) image.
+1. Image the SD Card using Raspberry Pi Imager v 1.3 selecting the 'UNBUNTU 20.04 LTS (RASBERRY PI 3/4)(64-bit) image.
 
-2. When imaging is completed, remove the SSD and then reinsert it so that it is mounted.
+2. When imaging is completed, remove the SD Card and then reinsert it so that it is mounted.
 
-3. Modify 'network-config' found on the SSD so that it contains only the items in the example below. Comment out with #, or remove, all other settings including the LAN ones. Enter any missing items. Be certain to maintain only the indentations shown. Use two spaces for each indentation. Remove all tab characters. Be especially careful if using Notepad++ as it will enter tabs wherever enter is used to start a new line. Replace the SSID with your wireless SSID and the PassPhrase with your wireless passphrase. When done, those two values should be wrapped in quotes. Save the modified file to the SSD.
+3. Copy 'network-config' & 'user-data' from the 'Files to Copy to SD Card' folder in this repository, overwitting the same two files on the SD Card.
 
-4. Edit 'user-data' appending the additional lines shown below. Again, use spaces, not tabs and mind the indentation.
+If you choose to make your own version of these files by entering the changes manuauly intead, be especially careful with editors like Notepad++ that may enter tabs wherever you press 'enter' to start a new line. You must mind the indentations, use only two spaces for each indent, etc. as required by YAML and cloud-init.
 
-5. Eject the SDD, remove it from the computer used to image it, and then insert into the powered off Raspberry Pi. Then, power up the RPi.
+4. Edit 'network-config' on the SD Card, replacing SSID and PassPhrase with your wireless access point credentials. Ensure the two values are wrapped in quotes. Save the modified file to the SD Card.
 
-6. Allow Ubuntu to boot; DO NOT try to log into Ubuntu as soon as possible. Wait until Cloud-Init runs (although it appears to be doing nothing - in about two minutes it will show SSH info when done). If you don't wait you may not be able to logon with the default user and passwd. At the end of the cloud-init,Ubuntu will be rebooted. What a couple of minutes for the server to boot.
+5. Eject the SD Card, remove from the computer used for imaging/editing and insert it into your powered-off Raspberry Pi 4B. Then, power up the Raspberry Pi.
 
-7. Logon either at the console or remotely using ssh ubuntu@x.x.x.x (get the address from your router, etc.)
+6. Wait about 4 minutes to allow Ubuntu to boot, cloud-init to do its job, and then Ubuntu to reboot. If you observe with a montior, you will see the logon box appear after the first boot but it will take about two more minutes for cloud-init to show SSH keys, etc., and then reboot. If you try to logon before cloud-init is done the default credentials will not work as they are set by cloud-init.
 
-That's it: Headless, Wi-Fi'd Ubuntu 20.04 on Raspbery Pi 4b
+7. Logon locally if you have a monitor and keyboard attached or if headless check your router, etc. to find the ip address and then connect using: ssh ubuntu@w.x.y.z.
 
-network-config example:
-
-# This file contains a netplan-compatible configuration which cloud-init
-# will apply on first-boot. Please refer to the cloud-init documentation and
-# the netplan reference for full details:
-#
-# https://cloudinit.readthedocs.io/
-# https://netplan.io/reference
-#
-
-version: 2
-renderer: networkd
-wifis:
-  wlan0:
-    dhcp4: true
-    dhcp6: true
-    optional: true
-    access-points:
-      "SSID":
-         password: "PassPhrase"
-
-Append this to the end of 'user-data':
-
-##Reboot after cloud-init completes
-power_state:
-  mode: reboot
+That's it: Headless, Wi-Fi'd Ubuntu 20.04 on Raspbery Pi 4B.
