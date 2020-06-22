@@ -1,4 +1,4 @@
-# Ubuntu-20.04-WiFi-RaspberyPi4B
+# Ubuntu 20.04 WiFi RaspberyPi 4B
 Configuring Ubuntu 20.04 to use WiFi on Raspberry Pi 4B using cloud-init (for use with a monitor or headless).
 NOTE: I first published this solution here: https://raspberrypi.stackexchange.com/a/113642/121286. 
 Using Andbdrew's tips there, I was able to make this work headless (and with a head) consistently without disabling Cloud-Init. Thanks to @enconn, for brainstorming with me on this, and for directing me to documentation for cloudinit: https://cloudinit.readthedocs.io/en/latest/topics/examples.html#reboot-poweroff-when-finished.
