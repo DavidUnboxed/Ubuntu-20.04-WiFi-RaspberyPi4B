@@ -3,7 +3,7 @@ How to configure Raspberry Pi 4B & Ubuntu 20.04 for headless Wi-Fi without disab
  
 1. Image the SD Card using Raspberry Pi Imager v 1.3 selecting the 'UNBUNTU 20.04 LTS (RASBERRY PI 3/4)(64-bit) image. See: https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#1-overview
 
-2. When imaging is completed, remove the SD Card and then reinsert it so that it is mounted. Under Windows, Raspberry Pi Imager v 1.3, software ejects the SD Card after writing the image and it will be unavaialble until removed and re-inserted.
+2. When imaging is completed, remove the SD Card and then reinsert it so that it is mounted. Under Windows, Raspberry Pi Imager v 1.3, software ejects the SD Card after writing the image and it will be unavailable until removed and re-inserted.
 
 3. Copy 'network-config' & 'user-data' from the 'Files to Copy to SD Card' folder in this repository, overwitting the same two files on the SD Card.
 
