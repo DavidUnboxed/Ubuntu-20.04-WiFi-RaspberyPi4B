@@ -78,6 +78,7 @@ ssh_pwauth: true
 #- [ sh, -xc, "echo $(date) ': hello world!'" ]
 #- [ wget, "http://ubuntu.com", -O, /run/mydir/index.html ]
 
-##  Reboot after cloud-init completes
+##  Reboot after cloud-init completes because otherwise wlan0 will not come up...
+##  despite cloud-init having applied settings from network-config
 power_state:
   mode: reboot
