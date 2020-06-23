@@ -6,7 +6,7 @@
 # https://netplan.io/reference
 #
 
-#Replace the entire user-data on the imaged SSD with this file.
+#Replace the entire user-data on the imaged SD Card with this file.
 version: 2
 renderer: networkd
 wifis:
