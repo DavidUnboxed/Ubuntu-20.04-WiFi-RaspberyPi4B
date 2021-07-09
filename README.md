@@ -13,7 +13,7 @@ How to configure Raspberry Pi 4B & Ubuntu 20.04 for headless Wi-Fi without disab
 
 6. Power up the Raspberry Pi 4B and then Wait about 4 minutes to allow Ubuntu to boot, cloud-init to do its job, and then Ubuntu to reboot. If you observe with a montior, you will see the logon box appear after the first boot but it will take about two more minutes for cloud-init to show SSH keys, etc., and then reboot. If you try to logon before cloud-init is done the default credentials will not work as they are set by cloud-init.
 
-7. Logon locally if you have a monitor and keyboard attached or via SSH if headless. The default user is 'Ubuntu' and the default password is 'Ubuntu'. See Ubuntu Tutorial: https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#4-boot-ubuntu-server
+7. Logon locally if you have a monitor and keyboard attached or via SSH if headless. The default user is 'ubuntu' and the default password is 'ubuntu'. See Ubuntu Tutorial: https://ubuntu.com/tutorials/how-to-install-ubuntu-on-your-raspberry-pi#4-boot-ubuntu-server
 
 That's it: Headless, Wi-Fi'd Ubuntu 20.04 on Raspbery Pi 4B.
 
