@@ -10,11 +10,10 @@
 version: 2
 renderer: networkd
 wifis:
-  wlan0:
-    dhcp4: true
-    dhcp6: true
-    optional: true
-    access-points:
-      "SSID":
-         password: "PassPhrase"
-
+    wlan0:
+        dhcp4: true
+        dhcp6:true
+        optional:true
+        access-points:
+            "wifi network name":
+                password: "wifi password"
